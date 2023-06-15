@@ -5,7 +5,7 @@ const Quiz = require('../models/Quiz');
 const getActiveQuizes=async(req,res)=>{
   try {
     const currentDate = new Date();
-
+    console.log("current date is: ",currentDate);
     const activeQuizzes = await Quiz.find({
         startDate: { $lte: currentDate },
         endDate: { $gt: currentDate },
