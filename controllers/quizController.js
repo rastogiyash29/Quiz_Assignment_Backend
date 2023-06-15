@@ -5,7 +5,7 @@ const Quiz = require('../models/Quiz');
 const getActiveQuizes=async(req,res)=>{
   try {
     const currentDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-    console.log("current date is: ",currentDate);
+
     const activeQuizzes = await Quiz.find({
         startDate: { $lte: currentDate },
         endDate: { $gt: currentDate },
@@ -21,7 +21,7 @@ const getQuizById=async(req,res)=>{
   try {
       //checking time constraints also whether my this quiz with given id has 
       //completed or not.
-      const pastDate = new Date();
+      const pastDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
       pastDate.setMinutes(pastDate.getMinutes() - 5);
     
 
@@ -41,7 +41,7 @@ const getQuizById=async(req,res)=>{
 
 const getEndedQuizes=async(req,res)=>{
     try {
-        const pastDate = new Date();
+        const pastDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
         pastDate.setMinutes(pastDate.getMinutes() - 5);
     
         const endedQuizes = await Quiz.find({
