@@ -17,7 +17,7 @@ app.use(cors({
     credentials:true,
     origin:[
         'http://localhost:3000',
-        "https://quiz-assignment-frontend-61wtpjd0a-rastogiyash29.vercel.app"
+        'https://quiz-assignment-frontend-61wtpjd0a-rastogiyash29.vercel.app'
     ]
 }));
 app.use('/',indexRouter);
