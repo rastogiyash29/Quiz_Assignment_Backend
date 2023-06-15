@@ -4,7 +4,7 @@ const Quiz = require('../models/Quiz');
 
 const getActiveQuizes=async(req,res)=>{
   try {
-    const currentDate = new Date();
+    const currentDate = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
     console.log("current date is: ",currentDate);
     const activeQuizzes = await Quiz.find({
         startDate: { $lte: currentDate },
