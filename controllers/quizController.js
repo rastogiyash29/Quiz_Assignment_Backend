@@ -79,7 +79,6 @@ function isValidQuiz(quiz) {
     !Array.isArray(quiz.questions) ||
     quiz.questions.length === 0
   ) {
-    console.log("here ****",quiz.quizName);
     return false;
   }
 
