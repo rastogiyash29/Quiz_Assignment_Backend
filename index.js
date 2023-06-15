@@ -16,7 +16,7 @@ app.use(morgan('common'));
 app.use(cors({
     credentials:true,
     origin:[
-        'https://quiz-assignment-frontend-61wtpjd0a-rastogiyash29.vercel.app'
+        'https://quiz-assignment-frontend.vercel.app'
     ]
 }));
 app.use('/',indexRouter);
