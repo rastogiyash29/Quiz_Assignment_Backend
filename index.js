@@ -16,7 +16,7 @@ app.use(morgan('common'));
 app.use(cors({
     credentials:true,
     origin:[
-        'https://localhost:3000',
+        'http://localhost:3000',
         'https://quiz-assignment-frontend.vercel.app'
     ]
 }));
