@@ -4,8 +4,7 @@ const Quiz = require('../models/Quiz');
 
 const getActiveQuizes=async(req,res)=>{
   try {
-    const currentDateIST = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-    const currentDate = new Date(currentDateIST);
+    const currentDate = new Date().toISOString();
 
     const activeQuizzes = await Quiz.find({
         startDate: { $lte: currentDate },
@@ -22,7 +21,7 @@ const getQuizById=async(req,res)=>{
   try {
       //checking time constraints also whether my this quiz with given id has 
       //completed or not.
-      const currentDateIST = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+      const currentDateIST = new Date().toISOString();
       const pastDate = new Date(currentDateIST);
       pastDate.setMinutes(pastDate.getMinutes() - 5);
     
@@ -42,10 +41,10 @@ const getQuizById=async(req,res)=>{
 
 const getEndedQuizes=async(req,res)=>{
     try {
-        const currentDateIST = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
+        const currentDateIST = new Date().toISOString();
         const pastDate = new Date(currentDateIST);
         pastDate.setMinutes(pastDate.getMinutes() - 5);
-    
+
         const endedQuizes = await Quiz.find({
           endDate: { $lt: pastDate },
         });
@@ -62,10 +61,6 @@ const addQuiz=async(req,res) =>{
       if (!isValidQuiz(quiz)) {
         return res.send(error(400,"Invalid Quiz"));
       }
-
-      quiz.startDate=convertToIST(quiz.startDate);
-      quiz.endDate=convertToIST(quiz.endDate);
-  
       const newQuiz = new Quiz(quiz);
       
       const savedQuiz = await newQuiz.save();
@@ -84,7 +79,6 @@ function isValidQuiz(quiz) {
     !Array.isArray(quiz.questions) ||
     quiz.questions.length === 0
   ) {
-    console.log("here ****",quiz.quizName);
     return false;
   }
 
@@ -111,12 +105,6 @@ function isValidQuiz(quiz) {
 
   // Quiz is valid
   return true;
-}
-
-function convertToIST(startDate) {
-  const startDateObj = new Date(startDate);
-  const startDateIST = startDateObj.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
-  return startDateIST;
 }
 
 module.exports={
